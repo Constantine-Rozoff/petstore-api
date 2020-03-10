@@ -7,4 +7,4 @@
   https://www.jetbrains.com/idea/download/#section=windows
 - Install IDE and create your first project 
 
-#Git.ignore - push this project to GitHub 
+# What is it and how to use it
