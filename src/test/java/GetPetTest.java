@@ -81,8 +81,6 @@ public class GetPetTest {
     }
     @Test
     public void updateExistingPet() {
-        String petId;
-        petId = "15435006002686";
         given()
                 .contentType("application/json")
                 .accept("application/json")
@@ -106,7 +104,7 @@ public class GetPetTest {
                         "  \"status\": \"available\"\n" +
                         "}")
                 .when()
-                .put("/v2/pet/{petId}", petId)
+                .put("/v2/pet")
                 .then()
                 .log()
                 .all()
