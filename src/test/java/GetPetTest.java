@@ -1,40 +1,51 @@
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import org.junit.Before;
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 public class GetPetTest {
+
+    @Before
+    public void before() {
+        RequestSpecBuilder spec = new RequestSpecBuilder();
+        spec.setBaseUri("https://petstore.swagger.io/v2");
+        spec.addHeader("Content-Type", "application/json");
+        RestAssured.requestSpecification = spec.build();
+    }
+
     @Test
     public void getPetById(){
-        int id = 1;
+        int id = 5;
         given()
                 .log()
                 .all()
-                .baseUri("https://petstore.swagger.io")
                 .when()
-                .get("/v2/pet/{id}", id)
+                .get("/pet/{id}", id)
                 .then()
                 .log()
                 .all()
+                .body("id", is(id))
                 .statusCode(200);
     }
     @Test
     public void getPetsByStatus(){
         String status = "sold";
         given()
-                .accept("application/json")
-                .baseUri("https://petstore.swagger.io")
                 .param("status", status)
                 .when()
-                .get("/v2/pet/findByStatus")
+                .get("/pet/findByStatus")
                 .then()
                 .log()
                 .all()
+                .body("status[0]", is("sold"))
                 .statusCode(200);
     }
     @Test
     public void createPet() {
+        String name = "sammy";
         given()
-                .contentType("application/json")
-                .accept("application/json")
                 .body("{\n" +
                         "  \"id\": 0,\n" +
                         "  \"category\": {\n" +
@@ -53,38 +64,36 @@ public class GetPetTest {
                         "  ],\n" +
                         "  \"status\": \"available\"\n" +
                         "}")
-                .baseUri("https://petstore.swagger.io")
                 .when()
-                .post("/v2/pet")
+                .post("/pet")
                 .then()
                 .log()
                 .all()
-                .statusCode(200)
-                .contentType("application/json");
-        //#TO DO: get ID of created pet and save it in variable
-        // Systen.out.println(createdPetId);
+                .body("name", is("sammy"))
+                .statusCode(200);
     }
     @Test
     public void updatePet() {
         String petId;
-        petId = "15435006002686";
+        petId = "1845563262948980734";
         given()
+                .log()
+                .all()
+                .contentType("application/x-www-form-urlencoded")
                 .param("name", "goga")
                 .param("status", "unavailable")
-                .baseUri("https://petstore.swagger.io")
                 .when()
-                .post("/v2/pet/{petId}", petId)
+                .post("/pet/{petId}", petId)
                 .then()
                 .log()
                 .all()
+                .body("message", is(petId))
                 .statusCode(200);
     }
     @Test
     public void updateExistingPet() {
+        String name = "annet";
         given()
-                .contentType("application/json")
-                .accept("application/json")
-                .baseUri("https://petstore.swagger.io")
                 .body("{\n" +
                         "  \"id\": 15435006002686,\n" +
                         "  \"category\": {\n" +
@@ -104,26 +113,26 @@ public class GetPetTest {
                         "  \"status\": \"available\"\n" +
                         "}")
                 .when()
-                .put("/v2/pet")
+                .put("/pet")
                 .then()
                 .log()
                 .all()
+                .body("name", is("annet"))
                 .statusCode(200);
     }
     @Test
     public void deletePet() {
-        String petId;
-        petId = "15435006003413";
-        given()
-                .accept("application/json")
-                .header("api_key", "special-key")
-                .baseUri("https://petstore.swagger.io")
-                .when()
-                .post("/v2/pet/{petId}", petId)
-                .then()
-                .log()
-                .all()
-                .statusCode(200);
+            String petId;
+            petId = "1845563262948980750";
+            given()
+                    .header("api_key", "special-key")
+                    .when()
+                    .delete("/pet/{petId}", petId)
+                    .then()
+                    .log()
+                    .all()
+                    .body("message", is(petId))
+                    .statusCode(200);
     }
 }
 
