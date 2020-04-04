@@ -13,20 +13,21 @@ public class GetPetTest {
         spec.setBaseUri("https://petstore.swagger.io/v2");
         spec.addHeader("Content-Type", "application/json");
         RestAssured.requestSpecification = spec.build();
+        //#TO DO: add int variable int to before
     }
 
     @Test
     public void getPetById(){
-        int id = 5;
+        int petId = 999888;
         given()
                 .log()
                 .all()
                 .when()
-                .get("/pet/{id}", id)
+                .get("/pet/{id}", petId)
                 .then()
                 .log()
                 .all()
-                .body("id", is(id))
+                .body("id", is(petId))
                 .statusCode(200);
     }
     @Test
@@ -45,9 +46,10 @@ public class GetPetTest {
     @Test
     public void createPet() {
         String name = "sammy";
+        int petId = 999888;
         given()
                 .body("{\n" +
-                        "  \"id\": 0,\n" +
+                        "  \"id\": " + petId + ",\n" +
                         "  \"category\": {\n" +
                         "    \"id\": 0,\n" +
                         "    \"name\": \"string\"\n" +
@@ -74,8 +76,7 @@ public class GetPetTest {
     }
     @Test
     public void updatePet() {
-        String petId;
-        petId = "1845563262948980734";
+        int petId = 999888;
         given()
                 .log()
                 .all()
@@ -87,15 +88,17 @@ public class GetPetTest {
                 .then()
                 .log()
                 .all()
-                .body("message", is(petId))
+                .body("message", is(String.valueOf(petId)))
                 .statusCode(200);
     }
     @Test
     public void updateExistingPet() {
+        //#TO DO: precondition - create a pet if it doesn't exist
         String name = "annet";
+        int petId = 999888;
         given()
                 .body("{\n" +
-                        "  \"id\": 15435006002686,\n" +
+                        "  \"id\": " + petId + " ,\n" +
                         "  \"category\": {\n" +
                         "    \"id\": 0,\n" +
                         "    \"name\": \"string\"\n" +
@@ -122,8 +125,8 @@ public class GetPetTest {
     }
     @Test
     public void deletePet() {
-            String petId;
-            petId = "1845563262948980750";
+        //#TO DO: precondition - create a pet if it doesn't exist
+            int petId = 999888;
             given()
                     .header("api_key", "special-key")
                     .when()
@@ -131,7 +134,7 @@ public class GetPetTest {
                     .then()
                     .log()
                     .all()
-                    .body("message", is(petId))
+                    .body("message", is(String.valueOf(petId)))
                     .statusCode(200);
     }
 }
