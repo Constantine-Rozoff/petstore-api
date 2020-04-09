@@ -1,6 +1,5 @@
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
@@ -27,9 +26,5 @@ public class GetPetByStatusTest {
                     .all()
                     .body("status", everyItem(equalTo(status)))
                     .statusCode(200);
-        }
-        @After
-        public void after(){
-            RestAssured.reset();
         }
     }
