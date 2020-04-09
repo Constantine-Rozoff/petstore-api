@@ -6,7 +6,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class GetPetTest {
+public class UpdatePetTest {
 
     @Before
     public void before() {
@@ -14,9 +14,7 @@ public class GetPetTest {
         spec.setBaseUri("https://petstore.swagger.io/v2");
         spec.addHeader("Content-Type", "application/json");
         RestAssured.requestSpecification = spec.build();
-        //#TO DO: add int variable int to before
     }
-    
     @Test
     public void updatePet() {
         int petId = 999888;
@@ -61,7 +59,6 @@ public class GetPetTest {
                 .body("message", is(String.valueOf(petId)))
                 .statusCode(200);
     }
-    
     @After
     public void after() {
         RestAssured.reset();

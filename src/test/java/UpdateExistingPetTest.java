@@ -6,7 +6,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class GetPetTest {
+public class UpdateExistingPetTest {
 
     @Before
     public void before() {
@@ -15,7 +15,6 @@ public class GetPetTest {
         spec.addHeader("Content-Type", "application/json");
         RestAssured.requestSpecification = spec.build();
     }
-    
     @Test
     public void updateExistingPet() {
         int petId = 999888;
@@ -74,3 +73,4 @@ public class GetPetTest {
                 .body("name", is("annet"))
                 .statusCode(200);
     }
+}
