@@ -65,6 +65,7 @@ public class PetEndpoint {
     }
     public ValidatableResponse updateExistingPet(String updatedBody) {
         return given()
+                .body(updatedBody)
                 .when()
                 .put(UPDATE_EXISTING_PET)
                 .then()

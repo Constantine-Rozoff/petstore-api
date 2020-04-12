@@ -56,7 +56,7 @@ public class UpdateExistingPetTest {
                         "  ],\n" +
                         "  \"status\": \"available\"\n" +
                         "}";
-        ValidatableResponse response = petEndpoint.createPet(updatedBody);
+        ValidatableResponse response = petEndpoint.updateExistingPet(updatedBody);
         createdPetId = response.extract().path("id");
     }
 }
