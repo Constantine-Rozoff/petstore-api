@@ -22,9 +22,9 @@ public class PetEndpoint {
                 .log()
                 .all();
     }
-    public ValidatableResponse createPet(String body) {
+    public ValidatableResponse createPet(Pet pet) {
         return given()
-                .body(body)
+                .body(pet)
                 .when()
                 .post(CREATE_PET)
                 .then()
@@ -63,9 +63,9 @@ public class PetEndpoint {
                 .body("status", everyItem(equalTo(status)))
                 .statusCode(200);
     }
-    public ValidatableResponse updateExistingPet(String updatedBody) {
+    public ValidatableResponse updateExistingPet(Pet petUpdated) {
         return given()
-                .body(updatedBody)
+                .body(petUpdated)
                 .when()
                 .put(UPDATE_EXISTING_PET)
                 .then()

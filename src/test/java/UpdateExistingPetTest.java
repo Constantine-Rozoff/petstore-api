@@ -5,31 +5,13 @@ import org.junit.Test;
 
 public class UpdateExistingPetTest {
 
-    PetEndpoint petEndpoint = new PetEndpoint();
-    long createdPetId;
+    private PetEndpoint petEndpoint = new PetEndpoint();
+    private long createdPetId;
 
     @Before
     public void createPet() {
-        int id = 0;
-        String body = "{\n" +
-                "  \"id\": \""+ id +"\",\n" +
-                "  \"category\": {\n" +
-                "    \"id\": 0,\n" +
-                "    \"name\": \"string\"\n" +
-                "  },\n" +
-                "  \"name\": \"sammy\",\n" +
-                "  \"photoUrls\": [\n" +
-                "    \"string\"\n" +
-                "  ],\n" +
-                "  \"tags\": [\n" +
-                "    {\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"string\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"status\": \"available\"\n" +
-                "}";
-        ValidatableResponse response = petEndpoint.createPet(body);
+        Pet pet = new Pet("0", "sammy", "available");
+        ValidatableResponse response = petEndpoint.createPet(pet);
         createdPetId = response.extract().path("id");
     }
     @After
@@ -38,25 +20,7 @@ public class UpdateExistingPetTest {
     }
     @Test
     public void updateExistingPet() {
-                String updatedBody = "{\n" +
-                        "  \"id\": " + createdPetId + " ,\n" +
-                        "  \"category\": {\n" +
-                        "    \"id\": 0,\n" +
-                        "    \"name\": \"string\"\n" +
-                        "  },\n" +
-                        "  \"name\": \"annet\",\n" +
-                        "  \"photoUrls\": [\n" +
-                        "    \"string\"\n" +
-                        "  ],\n" +
-                        "  \"tags\": [\n" +
-                        "    {\n" +
-                        "      \"id\": 0,\n" +
-                        "      \"name\": \"string\"\n" +
-                        "    }\n" +
-                        "  ],\n" +
-                        "  \"status\": \"available\"\n" +
-                        "}";
-        ValidatableResponse response = petEndpoint.updateExistingPet(updatedBody);
-        createdPetId = response.extract().path("id");
+        Pet petUpdated = new Pet(Long.toString(createdPetId), "annet", "pending");
+        ValidatableResponse response = petEndpoint.updateExistingPet(petUpdated);
     }
 }
