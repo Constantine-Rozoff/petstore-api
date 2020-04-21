@@ -7,7 +7,7 @@ public class GetPetByStatusTest {
 
         @Test
         public void getPetsByStatus() {
-            String status = "sold";
+            Status status = Status.SOLD;
             ValidatableResponse response = petEndpoint.getPetByStatus(status);
         }
     }

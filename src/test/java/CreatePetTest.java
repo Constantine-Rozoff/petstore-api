@@ -13,7 +13,7 @@ public class CreatePetTest {
     }
     @Test
     public void createPet() {
-        Pet pet = new Pet("0", "sammy", "available");
+        Pet pet = new Pet("0", "sammy", Status.AVAILABLE);
         ValidatableResponse response = petEndpoint.createPet(pet);
         createdPetId = response.extract().path("id");
     }

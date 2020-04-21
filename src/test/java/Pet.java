@@ -4,9 +4,9 @@ public class Pet {
     private String name;
     private String[] photoUrls;
     private Tags[] tags;
-    private String status;
+    private Status status;
 
-    public Pet(String id, String name, String status) {
+    public Pet(String id, String name, Status status) {
         this.id = id;
         this.category = new Category("0", "dogs");
         this.name = name;
@@ -31,7 +31,7 @@ public class Pet {
         return tags;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
