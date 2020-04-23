@@ -40,6 +40,7 @@ public class PetEndpoint {
                 .when()
                 .post(CREATE_PET)
                 .then()
+                .body("name", is("sammy"))
                 .statusCode(SC_OK);
     }
 
