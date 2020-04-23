@@ -13,6 +13,7 @@ public class DeletePetTest {
         ValidatableResponse response = petEndpoint.createPet(pet);
         createdPetId = response.extract().path("id");
     }
+
     @Test
     public void deletePet() {
         petEndpoint.deletePet(createdPetId);

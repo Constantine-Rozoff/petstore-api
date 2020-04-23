@@ -33,6 +33,7 @@ public class PetEndpoint {
                 .baseUri("https://petstore.swagger.io/v2")
                 .contentType(ContentType.JSON);
     }
+
     public ValidatableResponse createPet(Pet pet) {
         return given()
                 .body(pet)
@@ -41,14 +42,16 @@ public class PetEndpoint {
                 .then()
                 .statusCode(SC_OK);
     }
+
     public ValidatableResponse getPetById(long petId) {
         return given()
                 .when()
                 .get(GET_PET_BY_ID, petId)
                 .then()
-                .body( "id", anyOf(is(petId), is(Status.AVAILABLE)))
+                .body("id", anyOf(is(petId), is(Status.AVAILABLE)))
                 .statusCode(SC_OK);
     }
+
     public ValidatableResponse deletePet(long petId) {
         return given()
                 .when()
@@ -57,6 +60,7 @@ public class PetEndpoint {
                 .body("message", is(String.valueOf(petId)))
                 .statusCode(SC_OK);
     }
+
     public ValidatableResponse getPetByStatus(Status status) {
         return given()
                 .param("status", status)
@@ -66,6 +70,7 @@ public class PetEndpoint {
                 .body("status", everyItem(equalTo(status)))
                 .statusCode(SC_OK);
     }
+
     public ValidatableResponse updateExistingPet(Pet petUpdated) {
         return given()
                 .body(petUpdated)
@@ -75,6 +80,7 @@ public class PetEndpoint {
                 .body("name", is("annet"))
                 .statusCode(SC_OK);
     }
+
     public ValidatableResponse updatePet(long petId) {
         return given()
                 .contentType("application/x-www-form-urlencoded")
@@ -86,16 +92,18 @@ public class PetEndpoint {
                 .body("message", is(String.valueOf(petId)))
                 .statusCode(SC_OK);
     }
-    public ValidatableResponse uploadPetImage(long petId) {
+
+    public ValidatableResponse uploadPetImage(long petId, String fileName) {
+
+        File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
+
         return given()
                 .contentType("multipart/form-data")
-                .header("api-key", "special-key")
-                .multiPart(new File("C:/Users/test/Desktop/HindMD/Cat.jpg"))
+                .multiPart(file)
                 .when()
                 .post(UPLOAD_PET_IMAGE, petId)
                 .then()
-                .body("message", is("additionalMetadata: null\nFile uploaded to ./Cat.jpg, 216172 bytes"))
+                .body("message", allOf(containsString("File uploaded"), containsString(file.getName())))
                 .statusCode(SC_OK);
-
     }
 }

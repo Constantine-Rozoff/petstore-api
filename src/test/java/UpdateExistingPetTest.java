@@ -14,10 +14,12 @@ public class UpdateExistingPetTest {
         ValidatableResponse response = petEndpoint.createPet(pet);
         createdPetId = response.extract().path("id");
     }
+
     @After
     public void deletePet() {
         petEndpoint.deletePet(createdPetId);
     }
+
     @Test
     public void updateExistingPet() {
         Pet petUpdated = new Pet(Long.toString(createdPetId), "annet", Status.PENDING);

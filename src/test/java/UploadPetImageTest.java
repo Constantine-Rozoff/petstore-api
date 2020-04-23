@@ -16,7 +16,7 @@ public class UploadPetImageTest {
     }
 
     @Test
-    public void uploadPetImage() {petEndpoint.uploadPetImage(createdPetId);}
+    public void uploadPetImage() {petEndpoint.uploadPetImage(createdPetId, "Cat.jpg");}
 
     @After
     public void deletePet() {

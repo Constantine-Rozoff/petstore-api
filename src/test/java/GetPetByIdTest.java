@@ -14,13 +14,13 @@ public class GetPetByIdTest {
         ValidatableResponse response = petEndpoint.createPet(pet);
         createdPetId = response.extract().path("id");
     }
+
     @After
     public void deletePet() {
         petEndpoint.deletePet(createdPetId);
     }
+
     @Test
-    public void getPetById(){
-        petEndpoint.getPetById(createdPetId);
-    }
+    public void getPetById() { petEndpoint.getPetById(createdPetId); }
 }
 
