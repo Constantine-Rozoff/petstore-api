@@ -7,4 +7,11 @@
   https://www.jetbrains.com/idea/download/#section=windows
 - Install IDE and create your first project 
 
-# What is it and how to use it
+# 2. Maven instalation
+- Download Maven and add ‘MAVEN_HOME’ and ‘M2_HOME’ Environment Variables
+- Include ‘maven/bin’ directory in ‘PATH’ variable
+- Verify maven in console
+    Type 'mvn -version' in terminal and hit ENTER
+    
+    **View Serenity HTML report:**  
+    `mvn serenity:aggregate`
