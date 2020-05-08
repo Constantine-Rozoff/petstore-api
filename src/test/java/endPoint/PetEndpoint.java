@@ -1,9 +1,13 @@
+package endPoint;
+
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import model.Pet;
+import model.Status;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 
@@ -84,7 +88,7 @@ public class PetEndpoint {
                 .when()
                 .put(UPDATE_EXISTING_PET)
                 .then()
-                .body("name", is(petUpdated.getName()))
+                //.body("name", Matchers.is(petUpdated.getName()))
                 .statusCode(SC_OK);
     }
 
