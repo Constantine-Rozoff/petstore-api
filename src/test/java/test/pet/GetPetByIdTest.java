@@ -1,4 +1,4 @@
-package test;
+package test.pet;
 
 import endPoint.PetEndpoint;
 import io.restassured.response.ValidatableResponse;
@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(SerenityRunner.class)
-public class UpdatePetTest {
+public class GetPetByIdTest {
 
     @Steps
     private PetEndpoint petEndpoint;
@@ -37,7 +37,6 @@ public class UpdatePetTest {
     }
 
     @Test
-    public void updatePet() {
-        petEndpoint.updatePet(createdPetId);
-    }
+    public void getPetById() { petEndpoint.getPetById(createdPetId); }
 }
+

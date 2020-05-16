@@ -3,5 +3,6 @@ package model;
 public enum Status {
     AVAILABLE,
     SOLD,
-    PENDING
+    PENDING,
+    STRING
 }

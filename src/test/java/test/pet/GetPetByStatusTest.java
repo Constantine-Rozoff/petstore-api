@@ -1,4 +1,4 @@
-package test;
+package test.pet;
 
 import endPoint.PetEndpoint;
 import io.restassured.response.ValidatableResponse;
@@ -12,28 +12,28 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(SerenityParameterizedRunner.class)
-public class UploadPetImageTest {
+public class GetPetByStatusTest {
 
     @Steps
     private PetEndpoint petEndpoint;
     private long createdPetId;
-    private final String fileName;
+    private final Status status;
 
-    public UploadPetImageTest(String fileName) {
-        this.fileName = fileName;
+    public GetPetByStatusTest(Status status) {
+        this.status = status;
     }
 
     @TestData
     public static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][]{
-            {"Cat.jpg"},
-            {"Dog.png"},
-            {"Airbus.tif"},
-            {"Petstore_API_tests.txt"}
+                {Status.AVAILABLE},
+                {Status.PENDING},
+                {Status.SOLD},
         });
     }
 
@@ -49,11 +49,13 @@ public class UploadPetImageTest {
         createdPetId = response.extract().path("id");
     }
 
-    @Test
-    public void uploadPetImage() {petEndpoint.uploadPetImage(createdPetId, fileName);}
-
     @After
     public void deletePet() {
         petEndpoint.deletePet(createdPetId);
+    }
+
+    @Test
+    public void getPetsByStatus() {
+        ValidatableResponse response = petEndpoint.getPetByStatus(status);
     }
 }

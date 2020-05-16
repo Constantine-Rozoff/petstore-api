@@ -1,4 +1,4 @@
-package test;
+package test.pet;
 
 import endPoint.PetEndpoint;
 import io.restassured.response.ValidatableResponse;
