@@ -3,6 +3,7 @@ package test.store;
 import endPoint.PetEndpoint;
 import io.restassured.response.ValidatableResponse;
 import model.Order;
+import model.Status;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class DeleteOrderByIDTest {
                 .petId(4)
                 .quantity(1)
                 .shipDate(System.currentTimeMillis())
-                //.status("placed")
+                .status(Status.PLACED)
                 .complete(true)
                 .build();
         ValidatableResponse response = petEndpoint.createOrder(order);

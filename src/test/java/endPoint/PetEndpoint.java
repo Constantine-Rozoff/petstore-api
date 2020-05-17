@@ -160,7 +160,6 @@ public class PetEndpoint {
                 .then()
                 .body("sold", instanceOf(Integer.class),
                 "string", instanceOf(Integer.class),
-                        "pending", instanceOf(Integer.class),
                         "available", instanceOf(Integer.class))
                 .statusCode(SC_OK);
     }
