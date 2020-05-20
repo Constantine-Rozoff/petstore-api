@@ -29,20 +29,12 @@ public class PetEndpoint {
     private final static String UPDATE_PET = "/pet/{id}";
     private final static String UPLOAD_PET_IMAGE = "/pet/{id}/uploadImage";
 
-    private final static String CREATE_ORDER = "/store/order";
-    private final static String GET_STORE_ORDER_BY_ID = "/store/order/{orderId}";
-    private final static String GET_INVENTORY_BY_STATUS = "/store/inventory";
-    private final static String DELETE_ORDER_BY_ID = "/store/order/{orderId}";
-
-
-
-
     static {
         SerenityRest.filters(new RequestLoggingFilter(LogDetail.ALL));
         SerenityRest.filters(new ResponseLoggingFilter(LogDetail.ALL));
     }
 
-    private RequestSpecification given() {
+    protected RequestSpecification given() {
         return SerenityRest
                 .given()
                 .baseUri("https://petstore.swagger.io/v2")
@@ -127,50 +119,6 @@ public class PetEndpoint {
                 .post(UPLOAD_PET_IMAGE, petId)
                 .then()
                 .body("message", allOf(containsString("File uploaded"), containsString(file.getName())))
-                .statusCode(SC_OK);
-    }
-
-    @Step
-    public ValidatableResponse createOrder(Order order) {
-        return given()
-                .body(order)
-                .when()
-                .post(CREATE_ORDER)
-                .then()
-                .body("petId", is(4))
-                .statusCode(SC_OK);
-    }
-
-    @Step
-    public ValidatableResponse getOrderById(Integer orderId) {
-        return given()
-                .when()
-                .get(GET_STORE_ORDER_BY_ID, orderId)
-                .then()
-                .body("id", is(orderId))
-                .statusCode(SC_OK);
-    }
-
-    @Step
-    public ValidatableResponse getInventoryByStatus(Status status) {
-        return given()
-                .param("status", status)
-                .when()
-                .get(GET_INVENTORY_BY_STATUS)
-                .then()
-                .body("sold", instanceOf(Integer.class),
-                "string", instanceOf(Integer.class),
-                        "available", instanceOf(Integer.class))
-                .statusCode(SC_OK);
-    }
-
-    @Step
-    public ValidatableResponse deleteOrder(Integer orderId) {
-        return given()
-                .when()
-                .delete(DELETE_ORDER_BY_ID, orderId)
-                .then()
-                .body("message", is(String.valueOf(orderId)))
                 .statusCode(SC_OK);
     }
 }

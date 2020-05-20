@@ -1,6 +1,6 @@
 package test.store;
 
-import endPoint.PetEndpoint;
+import endPoint.StoreEndpoint;
 import io.restassured.response.ValidatableResponse;
 import model.Order;
 import model.Status;
@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 public class DeleteOrderByIDTest {
 
     @Steps
-    private PetEndpoint petEndpoint;
+    private StoreEndpoint petEndpoint;
     private Integer orderId;
 
     @Before

@@ -1,2 +1,5 @@
 *.iml
+*.iws
 .idea/
+log/
+target/

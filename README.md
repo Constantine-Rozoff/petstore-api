@@ -1,3 +1,7 @@
+#About project
+A project contains autotests that cover API functionality of Petstore Swagger, especially Pet
+and Store entities and all request methods in it.
+
 # 1. Instalation
 - Download JAVA SDK (JDK) version 8 or higher 
   from https://www.java.com/en/download/
@@ -15,3 +19,8 @@
     
     **View Serenity HTML report:**  
     `mvn serenity:aggregate`
+    
+# 3. Run autotests
+User can run autotests choosing respective ones and using 'Run' button in IDE
+
+    
