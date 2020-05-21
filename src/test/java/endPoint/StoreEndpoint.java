@@ -9,12 +9,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 
-public class StoreEndpoint extends PetEndpoint {
-
-    private final static String CREATE_ORDER = "/store/order";
-    private final static String GET_STORE_ORDER_BY_ID = "/store/order/{orderId}";
-    private final static String GET_INVENTORY_BY_STATUS = "/store/inventory";
-    private final static String DELETE_ORDER_BY_ID = "/store/order/{orderId}";
+public class StoreEndpoint extends EndPoint {
 
     @Step
     public ValidatableResponse createOrder(Order order) {

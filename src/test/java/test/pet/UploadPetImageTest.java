@@ -20,7 +20,7 @@ public class UploadPetImageTest {
 
     @Steps
     private PetEndpoint petEndpoint;
-    private long createdPetId;
+    private Integer createdPetId;
     private final String fileName;
 
     public UploadPetImageTest(String fileName) {

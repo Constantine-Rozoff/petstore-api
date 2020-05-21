@@ -21,7 +21,7 @@ public class GetPetByStatusTest {
 
     @Steps
     private PetEndpoint petEndpoint;
-    private long createdPetId;
+    private Integer createdPetId;
     private final Status status;
 
     public GetPetByStatusTest(Status status) {

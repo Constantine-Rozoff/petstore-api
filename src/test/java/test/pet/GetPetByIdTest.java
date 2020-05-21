@@ -17,7 +17,7 @@ public class GetPetByIdTest {
 
     @Steps
     private PetEndpoint petEndpoint;
-    private long createdPetId;
+    private Integer createdPetId;
 
     @Before
     public void createPet() {

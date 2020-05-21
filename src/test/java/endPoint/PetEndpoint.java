@@ -1,15 +1,8 @@
 package endPoint;
 
-import io.restassured.filter.log.LogDetail;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
-import model.Order;
 import model.Pet;
 import model.Status;
-import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import org.hamcrest.Matchers;
 
@@ -17,29 +10,8 @@ import java.io.File;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.equalTo;
 
-public class PetEndpoint {
-
-    private final static String CREATE_PET = "/pet";
-    private final static String GET_PET_BY_ID = "/pet/{id}";
-    private final static String DELETE_PET_BY_ID = "/pet/{id}";
-    private final static String GET_PET_BY_STATUS = "/pet/findByStatus";
-    private final static String UPDATE_EXISTING_PET = "/pet";
-    private final static String UPDATE_PET = "/pet/{id}";
-    private final static String UPLOAD_PET_IMAGE = "/pet/{id}/uploadImage";
-
-    static {
-        SerenityRest.filters(new RequestLoggingFilter(LogDetail.ALL));
-        SerenityRest.filters(new ResponseLoggingFilter(LogDetail.ALL));
-    }
-
-    protected RequestSpecification given() {
-        return SerenityRest
-                .given()
-                .baseUri("https://petstore.swagger.io/v2")
-                .contentType(ContentType.JSON);
-    }
+public class PetEndpoint extends EndPoint {
 
     @Step
     public ValidatableResponse createPet(Pet pet) {
@@ -53,7 +25,7 @@ public class PetEndpoint {
     }
 
     @Step
-    public ValidatableResponse getPetById(long petId) {
+    public ValidatableResponse getPetById(Integer petId) {
         return given()
                 .when()
                 .get(GET_PET_BY_ID, petId)
@@ -63,7 +35,7 @@ public class PetEndpoint {
     }
 
     @Step
-    public ValidatableResponse deletePet(long petId) {
+    public ValidatableResponse deletePet(Integer petId) {
         return given()
                 .when()
                 .delete(DELETE_PET_BY_ID, petId)
@@ -95,7 +67,7 @@ public class PetEndpoint {
     }
 
     @Step
-    public ValidatableResponse updatePet(long petId) {
+    public ValidatableResponse updatePet(Integer petId) {
         return given()
                 .contentType("application/x-www-form-urlencoded")
                 .param("name", "goga")
@@ -108,7 +80,7 @@ public class PetEndpoint {
     }
 
     @Step
-    public ValidatableResponse uploadPetImage(long petId, String fileName) {
+    public ValidatableResponse uploadPetImage(Integer petId, String fileName) {
 
         File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
 
