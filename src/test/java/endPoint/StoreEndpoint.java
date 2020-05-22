@@ -2,6 +2,7 @@ package endPoint;
 
 import io.restassured.response.ValidatableResponse;
 import model.Order;
+import model.OrderStatus;
 import model.Status;
 import net.thucydides.core.annotations.Step;
 
@@ -34,7 +35,7 @@ public class StoreEndpoint extends EndPoint {
     }
 
     @Step
-    public ValidatableResponse getInventoryByStatus(Status status) {
+    public ValidatableResponse getInventoryByStatus(OrderStatus status) {
         return given()
                 .param("status", status)
                 .when()

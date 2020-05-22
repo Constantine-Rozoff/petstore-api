@@ -16,7 +16,7 @@ public class CreatePetTest {
 
     @Steps
     private PetEndpoint petEndpoint;
-    private Integer createdPetId;
+    private long createdPetId;
 
     @After
     public void deletePet() {

@@ -7,9 +7,9 @@ import lombok.Getter;
 @Builder
 public class Order {
     private String id;
-    private int petId;
+    private long petId;
     private int quantity;
     private long shipDate;
-    private Status status;
+    private OrderStatus status;
     private boolean complete;
 }

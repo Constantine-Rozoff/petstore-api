@@ -4,6 +4,5 @@ public enum Status {
     AVAILABLE,
     SOLD,
     PENDING,
-    STRING,
-    PLACED
+    STRING
 }

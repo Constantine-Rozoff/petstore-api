@@ -25,7 +25,7 @@ public class PetEndpoint extends EndPoint {
     }
 
     @Step
-    public ValidatableResponse getPetById(Integer petId) {
+    public ValidatableResponse getPetById(long petId) {
         return given()
                 .when()
                 .get(GET_PET_BY_ID, petId)
@@ -35,7 +35,7 @@ public class PetEndpoint extends EndPoint {
     }
 
     @Step
-    public ValidatableResponse deletePet(Integer petId) {
+    public ValidatableResponse deletePet(long petId) {
         return given()
                 .when()
                 .delete(DELETE_PET_BY_ID, petId)
@@ -67,7 +67,7 @@ public class PetEndpoint extends EndPoint {
     }
 
     @Step
-    public ValidatableResponse updatePet(Integer petId) {
+    public ValidatableResponse updatePet(long petId) {
         return given()
                 .contentType("application/x-www-form-urlencoded")
                 .param("name", "goga")
@@ -80,7 +80,7 @@ public class PetEndpoint extends EndPoint {
     }
 
     @Step
-    public ValidatableResponse uploadPetImage(Integer petId, String fileName) {
+    public ValidatableResponse uploadPetImage(long petId, String fileName) {
 
         File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
 
